@@ -1,0 +1,29 @@
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.not-found__emoji {
+  display: flex;
+  flex-direction: column;
+}
+
+.not-found__emoji span {
+  margin-top: 47px;
+  font-family: 'SFUIText';
+  font-size: 24px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.21;
+  letter-spacing: normal;
+  text-align: center;
+  color: var(--grey);
+}
+
+.not-found .button {
+  border: solid 3px var(--pink);
+  color: var(--pink);
+}

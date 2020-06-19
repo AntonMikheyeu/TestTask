@@ -1,0 +1,27 @@
+.input {
+  display: flex;
+  align-items: center;
+}
+
+.input__label {
+  font-family: 'SFUIText';
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  margin-right: 15px;
+  color: var(--grey);
+}
+
+.input__input {
+  outline: none;
+  border-radius: 11px;
+  border: solid 1px var(--grey);
+  padding: 6px;
+  font-family: 'SFUIText';
+  font-size: 13px;
+  color: var(--grey);
+}
