@@ -1,0 +1,37 @@
+.info_container {
+  display: flex;
+  justify-content: center;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  margin-top: 85px;
+  max-width: 614px;
+}
+
+.info__header {
+  font-family: 'SFUIText';
+  font-size: 36px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  color: var(--apple-green);
+  margin-bottom: 15px;
+}
+
+.info__text {
+  font-family: 'SFUIText';
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.71;
+  letter-spacing: normal;
+  color: var(--grey);
+  min-height: 191px;
+  margin-bottom: 30px;
+}
