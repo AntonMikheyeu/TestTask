@@ -1,0 +1,24 @@
+:root {
+  --apple-green: #7ed321;
+  --pink: #e990f9;
+  --header-height: calc(100vh*0.11);
+  --page-height: calc(100vh*0.89);
+}
+
+@font-face {
+  font-family: 'SFUIText';
+  src: url('./assets/fonts/SFUIText/SFUIText-Regular.woff');
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  font-family: 'SFUIText';
+}
+
+.page {
+  width: 100%;
+  height: var(--page-height);
+}

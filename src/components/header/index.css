@@ -1,0 +1,12 @@
+.header {
+  width: 100%;
+  height: var(--header-height);
+  background-color: var(--apple-green);
+  display: flex;
+  align-items: center;
+}
+
+.header__logo {
+  height: calc(100%*0.5);
+  margin-left: calc(100%*0.026);
+}
