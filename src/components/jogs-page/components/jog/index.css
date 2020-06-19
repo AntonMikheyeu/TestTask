@@ -1,0 +1,29 @@
+.jog {
+  display: flex;
+}
+
+.jog__logo {
+  margin-right: 46px;
+}
+
+.jog__properties__item {
+  margin-bottom: 9px;
+}
+
+.jog__properties__item_title, .jog__properties__item_value {
+  font-family: 'SFUIText';
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+}
+
+.jog__properties__item_title {
+  margin-right: 4px;
+  font-weight: bold;
+}
+
+.jog__properties__item_value {
+  color: var(--grey);
+}
