@@ -15,6 +15,7 @@ const history = createBrowserHistory();
 const AppRouter = () => {
   const { user, setUser } = React.useContext(AppContext);
   const token = document.cookie.split('access_token=')[1];
+  const [isPerformeRerendered, performRerender] = React.useState(false);
 
   const authRedirect = token || window.location.pathname === '/login'
     ? null : <Redirect to="/login" />;
@@ -23,7 +24,13 @@ const AppRouter = () => {
     () => {
       if (user.id || !token) return;
 
-      getUserData(token, setUser);
+      try {
+        getUserData(token, setUser);
+      } catch (error) {
+        console.error(error);
+        document.cookie = '';
+        performRerender(!isPerformeRerendered);
+      }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []

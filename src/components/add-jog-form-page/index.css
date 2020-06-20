@@ -5,8 +5,8 @@
 }
 
 .add-jog, .add-jog_mobile {
-  width: calc(140vmin*0.35);
-  height: calc(140vmin*0.26);
+  width: calc(160vmin*0.35);
+  height: calc(160vmin*0.26);
   border-radius: 44px;
   background-color: var(--apple-green);
   display: flex;
@@ -28,7 +28,7 @@
 }
 
 .add-jog-form {
-  width: calc(140vmin*0.22);
+  width: calc(160vmin*0.22);
   height: 100%;
   display: flex;
   flex-direction: column;

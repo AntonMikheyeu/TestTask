@@ -8,6 +8,8 @@ import ActiveToggler from '../../assets/pictures/filter-active.svg';
 import { AppContext } from '../../context';
 import { isMobile } from 'mobile-device-detect';
 import NotFound from '../not-found-page';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 const postfix = isMobile ? '_mobile' : '';
 
 const JogsPage = ({ history }) => {
@@ -15,6 +17,8 @@ const JogsPage = ({ history }) => {
   const [isUpdated, rerenderComponent] = React.useState(false);
   const [isFilterShown, setIsFilterShown] = React.useState(false);
   const [isJogsEmpty, setIsJogsEmpty] = React.useState(false);
+  const [startDate, setStartDate] = React.useState();
+  const [endDate, setEndDate] = React.useState();
   React.useEffect(() => {
     if (jogs.value && jogs.value.length && !jogs.isUpdated) return;
     (async () => {
@@ -31,6 +35,8 @@ const JogsPage = ({ history }) => {
         rerenderComponent(!isUpdated);
       } catch (error) {
         console.error(error);
+        document.cookie = '';
+        history.push('/login');
       }
     })();
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,14 +45,21 @@ const JogsPage = ({ history }) => {
   const list = React.useMemo(
     () => (
       jogs.value.map(({ date, distance: Distance, time: Time, id }, index) => {
-        if (!date || !Distance || !Time) return null;
+        let dateMilliseconds = date*1000;
+        const filterStart = startDate ? Date.parse(startDate) : 0;
+        const filterEnd = endDate ? Date.parse(endDate) : Date.now();
+        if (!date || !Distance || !Time || filterStart > dateMilliseconds || filterEnd < dateMilliseconds) return null;
 
-        const dateObj = new Date(date);
-        const stringDate = `${dateObj.getDate()}.${dateObj.getMonth() + 1}.${dateObj.getFullYear()}`;
+        const dateObj = new Date(dateMilliseconds);
+        const day = dateObj.getDate();
+        const preparedDay = day/10 < 1 ? `0${day}` : day;
+        const month = dateObj.getMonth() + 1;
+        const preparedMonth = month/10 < 1 ? `0${month}` : month;
+        const stringDate = `${preparedDay}.${preparedMonth}.${dateObj.getFullYear()}`;
 
         return <Jog key={index} Date={stringDate} Speed={Math.ceil(Distance/(Time/60))} Distance={Distance} Time={Distance} id={id} />;
       })),
-    [jogs.value]
+    [jogs.value, startDate, endDate]
   );
 
   const redirectToAddPage = React.useCallback(
@@ -55,16 +68,28 @@ const JogsPage = ({ history }) => {
   );
 
   const toggleFilter = React.useCallback(
-    () => setIsFilterShown(!isFilterShown),
+    () => {
+      setIsFilterShown(!isFilterShown);
+      setStartDate(undefined);
+      setEndDate(undefined);
+    },
     [isFilterShown]
   );
 
   if (isJogsEmpty) return <NotFound isButtonShown={true} />;
 
+  const setDatePickerStartDate = date => setStartDate(date);
+  const setDatePickerEndDate = date => setEndDate(date);
+ 
   return (
     <div className='page jogs'>
       {
-        isFilterShown && <div className='jogs__filter'>
+        isFilterShown &&
+        <div className={`jogs__filter${postfix}`}>
+          <span>Date from</span>
+          <DatePicker selected={startDate} onChange={setDatePickerStartDate} />
+          <span>Date to</span>
+          <DatePicker selected={endDate} onChange={setDatePickerEndDate} />
         </div>
       }
       {list}

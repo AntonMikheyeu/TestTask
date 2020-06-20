@@ -69,7 +69,7 @@ const AddJogFormPage = ({ history }) => {
                 Authorization: document.cookie.split('access_token=')[1]
               }
             })
-            if (response.status !== 200) throw new Error("Jog has not be created");
+            if (![200, 201].includes(response.status)) throw new Error("Jog has not be created");
             setIsUpdated(true);
             history.push('/jogs');
           } catch (error) {
