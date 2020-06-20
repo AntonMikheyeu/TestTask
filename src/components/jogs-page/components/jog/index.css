@@ -1,5 +1,11 @@
-.jog {
+.jog, .jog_mobile {
   display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.jog_mobile {
+  border-bottom: solid 1px grey;
 }
 
 .jog__logo {

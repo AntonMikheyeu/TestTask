@@ -3,6 +3,8 @@ import './index.css';
 import Button from '../button';
 import { withRouter } from 'react-router';
 import CancelLogo from '../../assets/pictures/cancel.svg';
+import { isMobile } from 'mobile-device-detect';
+const postfix = isMobile ? '_mobile' : '';
 
 const AddJogFormPage = ({ history }) => {
   const fields = [ "Distance", "Time", "Date" ]
@@ -20,7 +22,7 @@ const AddJogFormPage = ({ history }) => {
 
   return (
     <div className='page add-jog-form-wrapper'>
-      <div className='add-jog'>
+      <div className={`add-jog${postfix}`}>
         <img className='add-jog-form-wrapper__cancel' src={CancelLogo} alt='cancel' onClick={redirectToJogsList}/>
         <form className='add-jog-form' onSubmit={e => {
           e.preventDefault();
