@@ -2,9 +2,12 @@ import React from 'react';
 import './index.css';
 import Jog from './components/jog';
 import { withRouter } from 'react-router';
-import AddButton from '../../assets/pictures/add.svg'
+import AddButton from '../../assets/pictures/add.svg';
+import InactiveToggler from '../../assets/pictures/filter.svg';
+import ActiveToggler from '../../assets/pictures/filter-active.svg';
 
 const JogsPage = ({ history }) => {
+  const [isFilterShown, setIsFilterShown] = React.useState(false);
   const [jogsList, setList] = React.useState([]);
   React.useEffect(() => {
     //Fake tmp data
@@ -31,12 +34,25 @@ const JogsPage = ({ history }) => {
     [history]
   );
 
+  const toggleFilter = React.useCallback(
+    () => setIsFilterShown(!isFilterShown),
+    [isFilterShown]
+  );
+
   return (
     <div className='page jogs'>
-      <div className='jogs__filter'>
-      </div>
+      {
+        isFilterShown && <div className='jogs__filter'>
+        </div>
+      }
       {list}
       <img src={AddButton} alt='add' className='jogs__add' onClick={redirectToAddPage}/>
+      <div className='jogs__toggle-filter'>
+        <img src={isFilterShown ? ActiveToggler : InactiveToggler}
+          alt='toggle filter'
+          onClick={toggleFilter}
+        />
+      </div>
     </div>
   );
 };

@@ -31,3 +31,15 @@
   right: 40px;
   cursor: pointer;
 }
+
+.jogs__toggle-filter {
+  position: fixed;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--header-height);
+  padding-right: 36px;
+}
