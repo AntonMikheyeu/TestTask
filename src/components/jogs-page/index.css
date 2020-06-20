@@ -5,20 +5,41 @@
 }
 
 .jogs__filter {
-  width: 100%;
   min-height: calc(var(--header-height)*0.5);
+}
+
+.jogs__filter, .jogs__filter_mobile {
+  width: 100%;
   background-color: #eaeaea;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.jogs__filter .input {
-  margin-left: 45px;
+.jogs__filter .react-datepicker-wrapper input,
+.jogs__filter_mobile .react-datepicker-wrapper input {
+  margin-right: 45px;
+  margin-left: 15px;
+  width: 100px;
+  height: 31px;
+  border-radius: 11px;
+  border: solid 1px #979797;
 }
 
-.jogs__filter .input__input {
-  width: 100px;
+.jogs__filter, .jogs__filter_mobile {
+  font-family: 'SFUIText';
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: var(--grey);
+}
+
+.jogs__filter_mobile .react-datepicker-wrapper input {
+  margin: 10px;
 }
 
 .jogs .jog, .jogs .jog_mobile {

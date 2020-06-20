@@ -2,6 +2,11 @@
   display: flex;
   justify-content: center;
   width: 100%;
+  cursor: pointer;
+}
+
+.jog:hover {
+  background-color: #f6fff6;
 }
 
 .jog_mobile {
