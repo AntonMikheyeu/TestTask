@@ -17,3 +17,7 @@
   letter-spacing: normal;
   padding: 14px 30px;
 }
+
+.button:hover {
+  font-size: 20px;
+}

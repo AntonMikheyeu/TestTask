@@ -1,11 +1,10 @@
 import React from 'react';
 import './index.css';
-import Input from '../input';
 import Jog from './components/jog';
+import { withRouter } from 'react-router';
 import AddButton from '../../assets/pictures/add.svg'
 
-const JogsPage = () => {
-  const inputType = React.useMemo(() => 'search', []);
+const JogsPage = ({ history }) => {
   const [jogsList, setList] = React.useState([]);
   React.useEffect(() => {
     //Fake tmp data
@@ -19,22 +18,27 @@ const JogsPage = () => {
     ]);
   }, []);
 
-  const getJogsList = jogsList => (
-    jogsList.map(({ Date, Speed, Distance, Time }, index) => (
-      <Jog key={index} Date={Date} Speed={Speed} Distance={Distance} Time={Time} />
-    ))
+  const list = React.useMemo(
+    () => (
+      jogsList.map(({ Date, Speed, Distance, Time }, index) => (
+        <Jog key={index} Date={Date} Speed={Speed} Distance={Distance} Time={Time} />
+      ))),
+    [jogsList]
+  );
+
+  const redirectToAddPage = React.useCallback(
+    () => history.push('/jogs/add'),
+    [history]
   );
 
   return (
     <div className='page jogs'>
       <div className='jogs__filter'>
-        <Input label='Date from' type={inputType} />
-        <Input label='Date to' type={inputType} />
       </div>
-      {getJogsList(jogsList)}
-      <img src={AddButton} alt='add' className='jogs__add'/>
+      {list}
+      <img src={AddButton} alt='add' className='jogs__add' onClick={redirectToAddPage}/>
     </div>
   );
 };
 
-export default JogsPage;
+export default withRouter(JogsPage);
