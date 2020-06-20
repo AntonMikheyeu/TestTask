@@ -21,18 +21,24 @@
   width: 100px;
 }
 
-.jogs .jog {
-  margin-top: 80px;
+.jogs .jog, .jogs .jog_mobile {
+  padding: 40px 0;
 }
 
-.jogs__add {
+.jogs__add, .jogs__add_mobile {
   position: fixed;
   bottom: 40px;
   right: 40px;
   cursor: pointer;
 }
 
-.jogs__toggle-filter {
+.jogs__add_mobile {
+  height: 47px;
+  bottom: 30px;
+  right: 30px;
+}
+
+.jogs__toggle-filter, .jogs__toggle-filter_mobile {
   position: fixed;
   top: 0;
   right: 0;
@@ -42,4 +48,8 @@
   justify-content: center;
   height: var(--header-height);
   padding-right: 36px;
+}
+
+.jogs__toggle-filter_mobile {
+  right: 50px;
 }

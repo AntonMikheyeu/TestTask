@@ -4,15 +4,28 @@
   align-items: center;
 }
 
+.login__form, .login__form_mobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
 .login__form {
   width: calc(140vmin*0.35);
   height: calc(140vmin*0.26);
   border-radius: 44px;
   background-color: var(--pink);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+}
+
+.login__form_mobile button {
+  border: solid 3px var(--pink);
+  color: var(--pink);
+}
+
+.login__form_mobile img {
+  filter: invert(55%) sepia(8%) saturate(4446%) hue-rotate(224deg) brightness(126%) contrast(95%);
+  margin-bottom: 103px;
 }
 
 .login__form__logo {

@@ -5,6 +5,8 @@ import { withRouter } from 'react-router';
 import AddButton from '../../assets/pictures/add.svg';
 import InactiveToggler from '../../assets/pictures/filter.svg';
 import ActiveToggler from '../../assets/pictures/filter-active.svg';
+import { isMobile } from 'mobile-device-detect';
+const postfix = isMobile ? '_mobile' : '';
 
 const JogsPage = ({ history }) => {
   const [isFilterShown, setIsFilterShown] = React.useState(false);
@@ -46,8 +48,8 @@ const JogsPage = ({ history }) => {
         </div>
       }
       {list}
-      <img src={AddButton} alt='add' className='jogs__add' onClick={redirectToAddPage}/>
-      <div className='jogs__toggle-filter'>
+      <img src={AddButton} alt='add' className={`jogs__add${postfix}`} onClick={redirectToAddPage}/>
+      <div className={`jogs__toggle-filter${postfix}`}>
         <img src={isFilterShown ? ActiveToggler : InactiveToggler}
           alt='toggle filter'
           onClick={toggleFilter}
