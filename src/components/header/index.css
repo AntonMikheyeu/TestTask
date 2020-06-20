@@ -4,9 +4,36 @@
   background-color: var(--apple-green);
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .header__logo {
   height: calc(100%*0.5);
   margin-left: calc(100%*0.026);
+}
+
+.header nav {
+  margin-right: 118px;
+}
+
+.header a {
+  text-decoration: none;
+}
+
+.header span {
+  font-family: 'SFUIText';
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin: 0 23px;
+}
+
+.header span:hover {
+  text-decoration: underline;
 }
