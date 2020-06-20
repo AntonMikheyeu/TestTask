@@ -32,14 +32,11 @@
   color: #ffffff;
   text-transform: uppercase;
   margin: 0 23px;
+  padding-bottom: 4px;
 }
 
-.header .active_link {
-  text-decoration: underline;
-}
-
-.header span:hover {
-  text-decoration: underline;
+.header .active_link, .header span:hover {
+  border-bottom: solid 2px;
 }
 
 .header__logo__mobile {
@@ -60,7 +57,7 @@
 .header__mobile_navbar__logo {
   position: fixed;
   width: 98px;
-  height: 37px;
+  height: calc(var(--header-height)*0.5);
   top: 20px;
   left: 25px;
   filter: invert(58%) sepia(81%) saturate(410%) hue-rotate(46deg) brightness(104%) contrast(98%);

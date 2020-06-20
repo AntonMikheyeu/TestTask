@@ -5,30 +5,48 @@ import { withRouter } from 'react-router';
 import AddButton from '../../assets/pictures/add.svg';
 import InactiveToggler from '../../assets/pictures/filter.svg';
 import ActiveToggler from '../../assets/pictures/filter-active.svg';
+import { AppContext } from '../../context';
 import { isMobile } from 'mobile-device-detect';
+import NotFound from '../not-found-page';
 const postfix = isMobile ? '_mobile' : '';
 
 const JogsPage = ({ history }) => {
+  const { jogs, setJogs } = React.useContext(AppContext);
+  const [isUpdated, rerenderComponent] = React.useState(false);
   const [isFilterShown, setIsFilterShown] = React.useState(false);
-  const [jogsList, setList] = React.useState([]);
+  const [isJogsEmpty, setIsJogsEmpty] = React.useState(false);
   React.useEffect(() => {
-    //Fake tmp data
-    setList([
-      { Date: '20.12.2017', Speed: 15, Distance: 10, Time: 60 },
-      { Date: '20.12.2017', Speed: 15, Distance: 10, Time: 60 },
-      { Date: '20.12.2017', Speed: 15, Distance: 10, Time: 60 },
-      { Date: '20.12.2017', Speed: 15, Distance: 10, Time: 60 },
-      { Date: '20.12.2017', Speed: 15, Distance: 10, Time: 60 },
-      { Date: '20.12.2017', Speed: 15, Distance: 10, Time: 60 }
-    ]);
+    if (jogs.value && jogs.value.length && !jogs.isUpdated) return;
+    (async () => {
+      try {
+        const response = await fetch('/data/sync', {
+          headers: {
+            Authorization: document.cookie.split('access_token=')[1]
+          }
+        });
+        if (response.status !== 200) throw new Error("Jogs can't be synchronized");
+        const jogsList = (await response.json()).response.jogs;
+        if (!jogsList.length) setIsJogsEmpty(true);
+        setJogs(jogsList, false);
+        rerenderComponent(!isUpdated);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const list = React.useMemo(
     () => (
-      jogsList.map(({ Date, Speed, Distance, Time }, index) => (
-        <Jog key={index} Date={Date} Speed={Speed} Distance={Distance} Time={Time} />
-      ))),
-    [jogsList]
+      jogs.value.map(({ date, distance: Distance, time: Time, id }, index) => {
+        if (!date || !Distance || !Time) return null;
+
+        const dateObj = new Date(date);
+        const stringDate = `${dateObj.getDate()}.${dateObj.getMonth() + 1}.${dateObj.getFullYear()}`;
+
+        return <Jog key={index} Date={stringDate} Speed={Math.ceil(Distance/(Time/60))} Distance={Distance} Time={Distance} id={id} />;
+      })),
+    [jogs.value]
   );
 
   const redirectToAddPage = React.useCallback(
@@ -40,6 +58,8 @@ const JogsPage = ({ history }) => {
     () => setIsFilterShown(!isFilterShown),
     [isFilterShown]
   );
+
+  if (isJogsEmpty) return <NotFound isButtonShown={true} />;
 
   return (
     <div className='page jogs'>

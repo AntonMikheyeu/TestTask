@@ -7,7 +7,7 @@ import CancelLogo from '../../assets/pictures/cancel.svg'
 import { isMobile } from 'mobile-device-detect';
 import { withRouter } from 'react-router';
 
-const Header = () => {
+const Header = ({ history }) => {
   const [isMobileNavShown, setIsMobileNavShown] = React.useState(false);
   const toggleMenu = React.useCallback(
     () => setIsMobileNavShown(!isMobileNavShown),
@@ -57,9 +57,11 @@ const Header = () => {
     <div className='header'>
       <img className='header__logo' src={HeaderLogo} alt='logo'/>
       {
-        isMobile
+        history.location.pathname !== '/login'
+        ? isMobile
           ? mobileNavBar()
           : desctopNavBar()
+        : null
       }
     </div>
   );

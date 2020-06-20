@@ -7,16 +7,35 @@ import JogsPage from '../jogs-page';
 import NotFound from '../not-found-page';
 import InfoPage from '../info-page';
 import AddJogPageForm from '../add-jog-form-page';
+import { AppContext } from '../../context';
+import getUserData from '../login-page/utility/get-user-data';
 
 const history = createBrowserHistory();
 
 const AppRouter = () => {
+  const { user, setUser } = React.useContext(AppContext);
+  const token = document.cookie.split('access_token=')[1];
+
+  const authRedirect = token || window.location.pathname === '/login'
+    ? null : <Redirect to="/login" />;
+
+  React.useEffect(
+    () => {
+      if (user.id || !token) return;
+
+      getUserData(token, setUser);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
   return (
     <Router history={history}>
       <Header />
+      {authRedirect}
       <Switch>
         <Route exact path="/">
-            <Redirect to="/login" />
+            <Redirect to={token ? "/jogs" : "/login"} />
         </Route>
         <Route exact path="/login">
             <LoginPage />
