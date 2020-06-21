@@ -1,5 +1,5 @@
 const getUserData = async (Authorization, setUser) => {
-  const response = await fetch('/auth/user', {
+  const response = await fetch(`${window.proxy}/api/v1/auth/user`, {
     headers: {
       Authorization
     }

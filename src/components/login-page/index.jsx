@@ -14,7 +14,7 @@ const LoginPage = ({ history }) => {
 
   const login = async () => {
     try {
-      let response = await fetch('/auth/uuidLogin', {
+      let response = await fetch(`${window.proxy}/api/v1/auth/uuidLogin`, {
         method: 'POST',
         body: JSON.stringify({ uuid: 'hello' })
       });
