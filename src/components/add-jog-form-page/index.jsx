@@ -62,7 +62,7 @@ const AddJogFormPage = ({ history }) => {
               formData.user_id = jog.user_id;
             }
             
-            const response = await fetch('/data/jog', {
+            const response = await fetch('https://jogtracker.herokuapp.com/api/v1/data/jog', {
               method: isEdit ? 'PUT' : 'POST',
               body: JSON.stringify(formData),
               headers: {

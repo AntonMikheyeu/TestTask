@@ -23,7 +23,7 @@ const JogsPage = ({ history }) => {
     if (jogs.value && jogs.value.length && !jogs.isUpdated) return;
     (async () => {
       try {
-        const response = await fetch('/data/sync', {
+        const response = await fetch('https://jogtracker.herokuapp.com/api/v1/data/sync', {
           headers: {
             Authorization: document.cookie.split('access_token=')[1]
           }
@@ -57,7 +57,7 @@ const JogsPage = ({ history }) => {
         const preparedMonth = month/10 < 1 ? `0${month}` : month;
         const stringDate = `${preparedDay}.${preparedMonth}.${dateObj.getFullYear()}`;
 
-        return <Jog key={index} Date={stringDate} Speed={Math.ceil(Distance/(Time/60))} Distance={Distance} Time={Distance} id={id} />;
+        return <Jog key={index} Date={stringDate} Speed={Math.ceil(Distance/(Time/60))} Distance={Distance} Time={Time} id={id} />;
       })),
     [jogs.value, startDate, endDate]
   );
