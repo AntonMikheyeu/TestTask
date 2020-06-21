@@ -23,7 +23,7 @@ const JogsPage = ({ history }) => {
     if (jogs.value && jogs.value.length && !jogs.isUpdated) return;
     (async () => {
       try {
-        const response = await fetch('https://jogtracker.herokuapp.com/api/v1/data/sync', {
+        const response = await fetch(`${window.proxy}/api/v1/data/sync`, {
           headers: {
             Authorization: document.cookie.split('access_token=')[1]
           }

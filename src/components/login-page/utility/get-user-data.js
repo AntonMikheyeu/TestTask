@@ -1,5 +1,5 @@
 const getUserData = async (Authorization, setUser) => {
-  const response = await fetch('https://jogtracker.herokuapp.com/api/v1/auth/user', {
+  const response = await fetch(`${window.proxy}/api/v1/auth/user`, {
     headers: {
       Authorization
     }
